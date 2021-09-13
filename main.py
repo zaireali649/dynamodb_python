@@ -99,6 +99,22 @@ for i in response['Items']:
     print(i)    
 
 #%%
+print("Remove item")
+
+k = api_calls[list(api_calls)[1]]['timestamp']
+
+response = dynamodb.Table('ISS_locations').delete_item(
+    Key={'timestamp':k}
+)
+
+
+print("Scanning table")
+response = dynamodb.Table('ISS_locations').scan()
+
+for i in response['Items']:
+    print(i)
+    
+#%%
 
 print("Deleting Table")
 client.delete_table(TableName='ISS_locations')
